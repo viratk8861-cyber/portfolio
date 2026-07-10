@@ -1,11 +1,11 @@
-Copyright (c) 2026 Jigar Kar
+Copyright (c) 2026 Kar Jigar
 
 Original portfolio:
-https://david-hckh.com
+https://kar-jigar.com
 
 Permission is hereby granted to use, copy, modify, and distribute this software for personal and educational purposes only, subject to the following conditions:
 
-1. Attribution to the original author (Jigar Kar) and the original portfolio link (https://david-hckh.com) must be clearly visible in:
+1. Attribution to the original author (Kar Jigar) and the original portfolio link (https://kar-jigar.com) must be clearly visible in:
    - the source code,
    - the repository README,
    - and any public deployment using substantial portions of this project.
