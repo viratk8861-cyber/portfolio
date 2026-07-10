@@ -12,7 +12,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "College App",
   theme: "light",
-  tags: ["javascript", "vue"],
+    tags: ["javascript"],
   videoBorder: true,
   source: "https://github.com/Jigar-kar/college-app",
   description: "College App — Beispielanwendung zur Verwaltung von Kursen und Studierenden.",
