@@ -6,13 +6,14 @@ import streakon3 from "../../../assets/images/projects/streakon/streakon-3.webp"
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "StreakOn",
+  title: "Resume / Portfolio",
   theme: "dark",
-  tags: ["next", "node", "postgresql", "redis"],
+  tags: ["javascript", "vue"],
   videoBorder: false,
-  live: "https://www.streakon.app",
+  live: "https://portfolio-jigar.vercel.app",
+  source: "https://github.com/Jigar-kar/resume",
   description:
-    "StreakOn helps small groups stay consistent with daily habits through shared streaks and simple check-ins.<br/><br/>The app was designed around low friction interactions, mobile usability, and lightweight social features, using Next.js, Node.js, PostgreSQL, and Redis.",
+    "Personal resume and portfolio site. Live demo available and source on GitHub.",
   components: [
     {
       type: "media",

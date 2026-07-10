@@ -10,13 +10,13 @@ import cubewar5 from "../../../assets/images/projects/cubewar/cubewar-5.webp";
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "CubeWar",
+  title: "Routino",
   theme: "dark",
-  tags: ["three", "node", "websockets", "redis"],
+  tags: ["javascript"],
   videoBorder: false,
-  live: "https://cubewar.io",
+  source: "https://github.com/Jigar-kar/Routino",
   description:
-    "CubeWar ist ein browserbasiertes Multiplayer-Spiel, in dem Spieler in schnellen, strategischen Kämpfen gegeneinander antreten.<br/><br/>Ich habe den gesamten Stack selbst entwickelt, inklusive der Spiel-Engine, des Client-Timeline-Systems und des Echtzeit-Netzwerks mit Redis-basiertem Matchmaking für flüssiges Gameplay.",
+    "Routino — kleines Routing-Utility und Demo-Projekte. Details im Repository.",
   components: [
     {
       type: "media",

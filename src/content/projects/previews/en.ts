@@ -15,16 +15,16 @@ export default [
     description: "Social habit tracking app",
   },
   {
-    title: "CubeWar",
+    title: "Routino",
     slug: "cubewar",
     thumbnail: thumbnailCubeWar,
-    description: "Multiplayer strategy game",
+    description: "Routing utility and demos",
   },
   {
-    title: "Quibbo",
+    title: "College App",
     slug: "quibbo",
     thumbnail: thumbnailQuibbo,
-    description: "Multiplayer gaming platform",
+    description: "Educational course management app",
   },
   {
     title: "Sharkie",
@@ -39,9 +39,9 @@ export default [
     description: "Dynamic 3D particles",
   }, */
   {
-    title: "Pokédex",
+    title: "Movements",
     slug: "pokedex",
     thumbnail: thumbnailPokedex,
-    description: "Open-source learning project",
+    description: "Animation & interaction demos",
   },
 ] as const satisfies ProjectPreview[];

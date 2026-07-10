@@ -10,12 +10,12 @@ import quibbo5 from "../../../assets/images/projects/quibbo/quibbo-5.webp";
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "Quibbo",
+  title: "College App",
   theme: "light",
-  tags: ["three", "node", "kubernetes", "redis", "postgresql"],
+  tags: ["javascript", "vue"],
   videoBorder: true,
-  description:
-    "Quibbo is a platform for fast, round-based multiplayer games. It brings together matchmaking, customizable 3D avatars, and account integration with ranked rewards.<br/><br/>The project started as a technical experiment and grew into a scalable system for testing new game ideas.",
+  source: "https://github.com/Jigar-kar/college-app",
+  description: "College App — a sample educational application for managing courses and students.",
   components: [
     {
       type: "media",

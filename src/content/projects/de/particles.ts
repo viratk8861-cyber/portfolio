@@ -7,13 +7,12 @@ import particles2 from "../../../assets/images/projects/particles/particles-2.we
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "WebGL Particles",
+  title: "GJS Image",
   theme: "dark",
-  tags: ["ogl", "javascript", "glsl"],
-  live: "https://particles.kar-jigar.com/",
+  tags: ["javascript"],
   videoBorder: false,
-  description:
-    "Ein experimentelles WebGL-Projekt mit OGL.js, das Partikel mithilfe mathematischer Formeln und Noise-Funktionen animiert.<br/><br/>Die Partikel bewegen sich fließend zwischen verschiedenen 3D-Formen, die ineinander übergehen.",
+  source: "https://github.com/Jigar-kar/GJS-image",
+  description: "GJS-image — Bild-Utilities und Demos. Details im Repository.",
   components: [
     {
       type: "media",

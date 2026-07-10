@@ -9,13 +9,12 @@ import sharkie4 from "../../../assets/images/projects/sharkie/sharkie-4.webp";
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "Sharkie",
+  title: "Chat App (Flutter)",
   theme: "light",
-  tags: ["javascript", "html", "css"],
-  live: "https://sharkie.kar-jigar.com/",
-  source: "https://github.com/karjigar/sharkie-game",
+  tags: ["dart", "flutter"],
+  source: "https://github.com/Jigar-kar/chat-app",
   description:
-    "Sharkie is a 2D underwater adventure game built with vanilla JavaScript and HTML5 Canvas.<br/><br/>The project is structured around object-oriented programming principles, featuring custom classes for entities, enemies, and game systems, alongside smooth animations, combat mechanics, and layered parallax backgrounds.",
+    "Chatting app built in Flutter — mobile chat application example. See the repository for implementation details.",
   components: [
     {
       type: "media",

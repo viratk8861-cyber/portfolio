@@ -9,13 +9,14 @@ export default {
   title: "StreakOn",
   theme: "dark",
   tags: ["next", "node", "postgresql", "redis"],
+  title: "Resume / Portfolio",
+  theme: "dark",
+  tags: ["javascript", "vue"],
   videoBorder: false,
-  live: "https://www.streakon.app",
+  live: "https://portfolio-jigar.vercel.app",
+  source: "https://github.com/Jigar-kar/resume",
   description:
-    "StreakOn unterstützt kleine Gruppen dabei, durch gemeinsame Streaks und einfache Check-ins bei täglichen Gewohnheiten dranzubleiben.<br/><br/>Die App wurde mit Fokus auf geringe Interaktionshürden, mobile Nutzung und leichte soziale Funktionen entwickelt – mit Next.js, Node.js, PostgreSQL und Redis.",
-  components: [
-    {
-      type: "media",
+    "Persönliche Resume- und Portfolioseite. Demo online, Quellcode auf GitHub.",
       props: {
         type: "image",
         src: streakon0,

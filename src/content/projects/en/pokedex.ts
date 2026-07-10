@@ -10,12 +10,11 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Pokédex",
   theme: "light",
-  tags: ["javascript", "html", "css"],
-  live: "https://pokedex.kar-jigar.com/",
-  source: "https://github.com/karjigar/pokedex",
+  tags: ["javascript"],
+  source: "https://github.com/Jigar-kar/movements",
   videoBorder: true,
   description:
-    "One of my first web projects to practice basic web development concepts. The Pokédex is open source so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, to get more experience with asynchronous data fetching.",
+    "Movements — animation and interaction demos. See the repository for examples and source.",
   components: [
     {
       type: "media",
