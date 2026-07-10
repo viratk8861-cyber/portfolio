@@ -6,9 +6,6 @@ import streakon3 from "../../../assets/images/projects/streakon/streakon-3.webp"
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "StreakOn",
-  theme: "dark",
-  tags: ["next", "node", "postgresql", "redis"],
   title: "Resume / Portfolio",
   theme: "dark",
   tags: ["javascript", "vue"],
@@ -17,6 +14,9 @@ export default {
   source: "https://github.com/Jigar-kar/resume",
   description:
     "Persönliche Resume- und Portfolioseite. Demo online, Quellcode auf GitHub.",
+  components: [
+    {
+      type: "media",
       props: {
         type: "image",
         src: streakon0,
