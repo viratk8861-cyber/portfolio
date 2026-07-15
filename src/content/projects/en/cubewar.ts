@@ -12,7 +12,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Routino",
   theme: "dark",
-  tags: ["javascript"],
+  tags: ["dart"],
   videoBorder: false,
   source: "https://github.com/Jigar-kar/Routino",
   description:

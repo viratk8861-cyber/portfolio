@@ -12,7 +12,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "College App",
   theme: "light",
-  tags: ["javascript"],
+  tags: ["dart", "flutter"],
   videoBorder: true,
   source: "https://github.com/Jigar-kar/college-app",
   description: "College App — a sample educational application for managing courses and students.",

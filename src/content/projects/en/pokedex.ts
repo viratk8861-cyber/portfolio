@@ -10,7 +10,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Pokédex",
   theme: "light",
-  tags: ["javascript"],
+  tags: ["dart"],
   source: "https://github.com/Jigar-kar/movements",
   videoBorder: true,
   description:

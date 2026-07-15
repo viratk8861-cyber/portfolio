@@ -11,7 +11,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Chat App (Flutter)",
   theme: "light",
-  tags: ["javascript"],
+  tags: ["dart", "flutter"],
   source: "https://github.com/Jigar-kar/chat-app",
   description:
     "Chatting app in Flutter — mobile Chat-Anwendung. Details im Repository.",

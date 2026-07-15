@@ -1,5 +1,3 @@
-import videoPokedex from "../../../assets/videos/pokedex.mp4";
-
 import pokedex0 from "../../../assets/images/projects/pokedex/pokedex-0.webp";
 import pokedex1 from "../../../assets/images/projects/pokedex/pokedex-1.webp";
 import pokedex2 from "../../../assets/images/projects/pokedex/pokedex-2.webp";
@@ -8,29 +6,21 @@ import pokedex3 from "../../../assets/images/projects/pokedex/pokedex-3.webp";
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "Pokédex",
+  title: "My Portfolio",
   theme: "light",
-  tags: ["dart"],
-  source: "https://github.com/Jigar-kar/movements",
+  tags: ["html", "css", "javascript"],
   videoBorder: true,
+  source: "https://github.com/Jigar-kar/my-portfolio",
   description:
-    "Movements — Animationen und Interaktions-Demos. Details und Quellcode im Repository.",
+    "My Portfolio — personal responsive website showcasing work, skills, and contact details built with semantic HTML, CSS, and basic JavaScript.",
   components: [
-    {
-      type: "media",
-      props: {
-        type: "video",
-        src: videoPokedex,
-        caption: "Pokédex Anwendung",
-      },
-    },
     {
       type: "media",
       props: {
         type: "image",
         src: pokedex0,
-        alt: "Standardansicht",
-        caption: "Standardansicht",
+        alt: "Hero Section",
+        caption: "Hero Section",
       },
     },
     {
@@ -38,8 +28,8 @@ export default {
       props: {
         type: "image",
         src: pokedex1,
-        alt: "Suchfunktion",
-        caption: "Suchfunktion",
+        alt: "Projects Grid",
+        caption: "Projects Grid",
       },
     },
     {
@@ -47,8 +37,8 @@ export default {
       props: {
         type: "image",
         src: pokedex2,
-        alt: "Responsives Design",
-        caption: "Responsives Design",
+        alt: "Contact Form",
+        caption: "Contact Form",
       },
     },
     {
@@ -56,8 +46,8 @@ export default {
       props: {
         type: "image",
         src: pokedex3,
-        alt: "Lazy-Loading",
-        caption: "Lazy-Loading",
+        alt: "Mobile View",
+        caption: "Mobile View",
       },
     },
   ],

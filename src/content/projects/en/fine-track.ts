@@ -6,22 +6,21 @@ import streakon3 from "../../../assets/images/projects/streakon/streakon-3.webp"
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "Resume / Portfolio",
+  title: "Fine Track",
   theme: "dark",
-  tags: ["javascript", "html", "css"],
+  tags: ["dart", "flutter"],
   videoBorder: false,
-  live: "https://portfolio-jigar.vercel.app",
-  source: "https://github.com/Jigar-kar/resume",
+  source: "https://github.com/Jigar-kar/fine-track",
   description:
-    "Persönliche Resume- und Portfolioseite. Demo online, Quellcode auf GitHub.",
+    "Fine Track — personal finance and expense tracking application. Manage your budget and track expenses easily.",
   components: [
     {
       type: "media",
       props: {
         type: "image",
         src: streakon0,
-        alt: "Solo- und Gruppen-Streaks",
-        caption: "Solo- und Gruppen-Streaks",
+        alt: "Budget Overview",
+        caption: "Budget Overview",
       },
     },
     {
@@ -29,8 +28,8 @@ export default {
       props: {
         type: "image",
         src: streakon1,
-        alt: "Streak-Fortschritt",
-        caption: "Streak-Fortschritt",
+        alt: "Expense Analytics",
+        caption: "Expense Analytics",
       },
     },
     {
@@ -38,8 +37,8 @@ export default {
       props: {
         type: "image",
         src: streakon2,
-        alt: "Freunde anfeuern",
-        caption: "Freunde anfeuern",
+        alt: "Transaction History",
+        caption: "Transaction History",
       },
     },
     {
@@ -47,8 +46,8 @@ export default {
       props: {
         type: "image",
         src: streakon3,
-        alt: "Einladungs-Flow",
-        caption: "Einladungs-Flow",
+        alt: "Category Settings",
+        caption: "Category Settings",
       },
     },
   ],

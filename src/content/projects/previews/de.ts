@@ -44,4 +44,28 @@ export default [
     thumbnail: thumbnailPokedex,
     description: "Animation- und Interaktions-Demos",
   },
+  {
+    title: "Fine Track",
+    slug: "fine-track",
+    thumbnail: thumbnailStreakon,
+    description: "App zur persönlichen Finanz- und Budgetverwaltung",
+  },
+  {
+    title: "My Portfolio",
+    slug: "my-portfolio",
+    thumbnail: thumbnailPokedex,
+    description: "Persönliche responsive Portfolio-Website",
+  },
+  {
+    title: "Shopify Listing",
+    slug: "shopify-listing",
+    thumbnail: thumbnailQuibbo,
+    description: "Shopify-Produktauflistung & Vorschau-Manager",
+  },
+  {
+    title: "Server Tycoon",
+    slug: "server-tycoon",
+    thumbnail: thumbnailCubeWar,
+    description: "Simulations-Dashboard zur Serververwaltung",
+  },
 ] as const satisfies ProjectPreview[];

@@ -8,7 +8,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Resume / Portfolio",
   theme: "dark",
-  tags: ["javascript"],
+  tags: ["javascript", "html", "css"],
   videoBorder: false,
   live: "https://portfolio-jigar.vercel.app",
   source: "https://github.com/Jigar-kar/resume",

@@ -7,12 +7,15 @@ export type TagVariant =
   | "html"
   | "css"
   | "javascript"
+  | "typescript"
   | "node"
   | "next"
   | "kubernetes"
   | "postgresql"
   | "ogl"
-  | "glsl";
+  | "glsl"
+  | "dart"
+  | "flutter";
 
 export const tagLabels = {
   three: "Three.js",
@@ -23,10 +26,13 @@ export const tagLabels = {
   html: "HTML",
   css: "CSS",
   javascript: "JavaScript",
+  typescript: "TypeScript",
   node: "Node.js",
   next: "Next.js",
   kubernetes: "Kubernetes",
   postgresql: "PostgreSQL",
   ogl: "OGL.js",
   glsl: "GLSL",
+  dart: "Dart",
+  flutter: "Flutter",
 } as const satisfies Record<TagVariant, string>;
