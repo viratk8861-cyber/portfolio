@@ -1,7 +1,4 @@
-import pokedex0 from "../../../assets/images/projects/pokedex/pokedex-0.webp";
-import pokedex1 from "../../../assets/images/projects/pokedex/pokedex-1.webp";
-import pokedex2 from "../../../assets/images/projects/pokedex/pokedex-2.webp";
-import pokedex3 from "../../../assets/images/projects/pokedex/pokedex-3.webp";
+import screenshot from "../../../assets/images/projects/my-portfolio/screenshot.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -18,36 +15,9 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: pokedex0,
+        src: screenshot,
         alt: "Hero-Bereich",
-        caption: "Hero-Bereich",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: pokedex1,
-        alt: "Projektraster",
-        caption: "Projektraster",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: pokedex2,
-        alt: "Kontaktformular",
-        caption: "Kontaktformular",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: pokedex3,
-        alt: "Mobile Ansicht",
-        caption: "Mobile Ansicht",
+        caption: "Haupt-Landingpage und Präsentation des Projektrasters",
       },
     },
   ],

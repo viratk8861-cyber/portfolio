@@ -1,7 +1,4 @@
-import cubewar0 from "../../../assets/images/projects/cubewar/cubewar-0.webp";
-import cubewar1 from "../../../assets/images/projects/cubewar/cubewar-1.webp";
-import cubewar2 from "../../../assets/images/projects/cubewar/cubewar-2.webp";
-import cubewar3 from "../../../assets/images/projects/cubewar/cubewar-3.webp";
+import screenshot from "../../../assets/images/projects/server-tycoon/screenshot.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -18,36 +15,9 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: cubewar0,
+        src: screenshot,
         alt: "Haupt-Dashboard",
-        caption: "Haupt-Dashboard",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: cubewar1,
-        alt: "Server-Upgrades",
-        caption: "Server-Upgrade-Panel",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: cubewar2,
-        alt: "Ereignisprotokoll",
-        caption: "Echtzeit-Ereignisprotokoll",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: cubewar3,
-        alt: "System-Statistiken",
-        caption: "Systemressourcen- und Bandbreitenstatistiken",
+        caption: "Haupt-Dashboard mit CPU-/Bandbreiten-Metriken und Ereignisprotokoll-Terminal",
       },
     },
   ],

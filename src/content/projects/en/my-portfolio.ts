@@ -1,7 +1,4 @@
-import pokedex0 from "../../../assets/images/projects/pokedex/pokedex-0.webp";
-import pokedex1 from "../../../assets/images/projects/pokedex/pokedex-1.webp";
-import pokedex2 from "../../../assets/images/projects/pokedex/pokedex-2.webp";
-import pokedex3 from "../../../assets/images/projects/pokedex/pokedex-3.webp";
+import screenshot from "../../../assets/images/projects/my-portfolio/screenshot.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -18,36 +15,9 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: pokedex0,
+        src: screenshot,
         alt: "Hero Section",
-        caption: "Hero Section",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: pokedex1,
-        alt: "Projects Grid",
-        caption: "Projects Grid",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: pokedex2,
-        alt: "Contact Form",
-        caption: "Contact Form",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: pokedex3,
-        alt: "Mobile View",
-        caption: "Mobile View",
+        caption: "Main Landing View and Projects Grid Showcase",
       },
     },
   ],

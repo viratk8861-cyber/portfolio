@@ -1,7 +1,4 @@
-import streakon0 from "../../../assets/images/projects/streakon/streakon-0.webp";
-import streakon1 from "../../../assets/images/projects/streakon/streakon-1.webp";
-import streakon2 from "../../../assets/images/projects/streakon/streakon-2.webp";
-import streakon3 from "../../../assets/images/projects/streakon/streakon-3.webp";
+import screenshot from "../../../assets/images/projects/fine-track/screenshot.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -18,36 +15,9 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: streakon0,
+        src: screenshot,
         alt: "Budget-Übersicht",
-        caption: "Budget-Übersicht",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: streakon1,
-        alt: "Ausgabenanalyse",
-        caption: "Ausgabenanalyse",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: streakon2,
-        alt: "Transaktionsverlauf",
-        caption: "Transaktionsverlauf",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: streakon3,
-        alt: "Kategorie-Einstellungen",
-        caption: "Kategorie-Einstellungen",
+        caption: "Budget-Übersicht und Ausgabenanalyse-Dashboard",
       },
     },
   ],
