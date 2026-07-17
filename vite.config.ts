@@ -41,7 +41,7 @@ export default defineConfig({
         manualChunks: {
           "vendor-three": ["three"],
           "vendor-gsap": ["gsap"],
-          "vendor-vue": ["vue", "vue-router", "vue-i18n"],
+          "vendor-vue": ["vue"],
           "vendor-howler": ["howler"],
         },
       },
