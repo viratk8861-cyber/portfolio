@@ -1,9 +1,28 @@
-<script setup>
+<script setup lang="ts">
 import Button from "../../../components/Button.vue";
 import Banner from "../../../components/Banner.vue";
 import { preloaderVisible } from "../../../composables/usePreloader";
 import { t } from "../../../i18n/utils/translate";
-import AppearingText from "../../../components/AppearingText.vue";
+
+const RESUME_URL = "https://raw.githubusercontent.com/Jigar-kar/resume/main/Jigar-kar_Resume.pdf";
+
+async function downloadResume() {
+  try {
+    const res = await fetch(RESUME_URL);
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Jigar-kar_Resume.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch {
+    // fallback: open in new tab
+    window.open(RESUME_URL, "_blank");
+  }
+}
 </script>
 
 <template>
@@ -13,6 +32,15 @@ import AppearingText from "../../../components/AppearingText.vue";
         <div class="hero-content-copys">
           <h1 class="hero-title">Kar<br />Jigar</h1>
           <Banner class="hero-banner" :copy="t('job-title')" v-if="!preloaderVisible" animated />
+          <button
+            class="hero-content-button"
+            @click="downloadResume"
+            id="hero-download-resume-btn"
+          >
+            <Button variant="accent" size="md" render-as="div">
+              ⬇ Download Resume
+            </Button>
+          </button>
         </div>
       </div>
     </div>
@@ -70,6 +98,7 @@ import AppearingText from "../../../components/AppearingText.vue";
       display: flex;
       flex-direction: column;
       gap: var(--space-sm);
+      position: relative;
 
       @include mixins.mq("md") {
         gap: var(--space-md);
@@ -78,6 +107,14 @@ import AppearingText from "../../../components/AppearingText.vue";
 
     &-button {
       width: fit-content;
+      position: relative;
+      z-index: 20;
+      margin-top: var(--space-sm);
+      /* reset native <button> styles */
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
     }
   }
 
@@ -102,20 +139,18 @@ import AppearingText from "../../../components/AppearingText.vue";
   }
 
   &-banner {
-    position: absolute;
-    bottom: 0;
-    right: -16px;
+    /* In-flow: keep the fun rotation but don't remove from layout */
+    position: relative;
     z-index: 10;
-    transform: rotate(-5deg) translate(0, 65%);
+    transform: rotate(-5deg) translateX(-8px);
+    align-self: flex-start;
 
     @include mixins.mq("sm") {
-      right: -24px;
-      transform: rotate(-5deg) translate(0, 70%);
+      transform: rotate(-5deg) translateX(-12px);
     }
 
     @include mixins.mq("lg") {
-      right: -32px;
-      transform: rotate(-5deg) translate(0, 80%);
+      transform: rotate(-5deg) translateX(-16px);
     }
   }
 }

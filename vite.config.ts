@@ -38,6 +38,12 @@ export default defineConfig({
         assetFileNames: "assets/[hash].[ext]",
         entryFileNames: "chunks/[name]-[hash].js",
         chunkFileNames: "chunks/[hash].js",
+        manualChunks: {
+          "vendor-three": ["three"],
+          "vendor-gsap": ["gsap"],
+          "vendor-vue": ["vue", "vue-router", "vue-i18n"],
+          "vendor-howler": ["howler"],
+        },
       },
     },
   },

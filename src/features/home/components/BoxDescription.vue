@@ -92,12 +92,38 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   const updatedTimelines = [...timelines.value, { timeline, delay }];
   timelines.value = updatedTimelines;
 };
+
+const mouseX = ref(0);
+const mouseY = ref(0);
+const isHovered = ref(false);
+
+const handleMouseMove = (e: MouseEvent) => {
+  const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+  mouseX.value = e.clientX - rect.left;
+  mouseY.value = e.clientY - rect.top;
+};
 </script>
 
 <template>
   <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-description">
-      <div class="box-description-content">
+      <div
+        class="box-description-content"
+        @mousemove="handleMouseMove"
+        @mouseenter="isHovered = true"
+        @mouseleave="isHovered = false"
+        :style="isHovered ? {
+          background: `radial-gradient(circle 100px at ${mouseX}px ${mouseY}px, rgba(52, 191, 255, 0.15) 0%, transparent 80%), linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%)`
+        } : {}"
+      >
+        <!-- Corner brackets -->
+        <div class="box-corners">
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
+        </div>
+
         <div class="box-description-details">
           <p class="box-description-details-name">Kar</p>
           <div class="box-description-details-location">
@@ -206,6 +232,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     height: 11px;
     background-color: var(--color-cyan-400);
     border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-cyan-400);
   }
 
   &::before {
@@ -214,21 +241,108 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
-    width: var(--line-length);
-    height: 0;
-    border-top: var(--stroke-sm) solid var(--color-cyan-400);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-cyan-400), transparent);
+    background-size: 200% 100%;
+    animation: laser-pulse-left 2s linear infinite;
+
+    @include mixins.landscape {
+      width: var(--line-length);
+    }
+  }
+
+  @keyframes laser-pulse-left {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 
   &-content {
-    border: var(--stroke-sm) solid var(--color-cyan-400);
+    border: var(--stroke-sm) solid rgba(52, 191, 255, 0.4);
     border-radius: var(--radius-md);
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
+    background-image: 
+      linear-gradient(rgba(52, 191, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52, 191, 255, 0.03) 1px, transparent 1px);
+    background-size: 12px 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(6px);
+
+    &:hover {
+      transform: scale(1.02);
+      border-color: rgba(52, 191, 255, 0.8);
+      box-shadow: 0 0 25px rgba(52, 191, 255, 0.35);
+
+      .corner-tl { transform: translate(-3px, -3px); border-color: rgba(255, 255, 255, 0.9); }
+      .corner-tr { transform: translate(3px, -3px); border-color: rgba(255, 255, 255, 0.9); }
+      .corner-bl { transform: translate(-3px, 3px); border-color: rgba(255, 255, 255, 0.9); }
+      .corner-br { transform: translate(3px, 3px); border-color: rgba(255, 255, 255, 0.9); }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -100px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, rgba(52, 191, 255, 0.05) 70%, rgba(52, 191, 255, 0.18) 95%, rgba(52, 191, 255, 0.5) 100%);
+      pointer-events: none;
+      animation: holographic-scan 4s linear infinite;
+    }
 
     @include mixins.landscape {
       padding: var(--space-xs) var(--space-sm);
 
       @include mixins.mq("md") {
         padding: var(--space-sm) var(--space-md);
+      }
+    }
+  }
+
+  @keyframes holographic-scan {
+    0% { transform: translateY(0); }
+    50%, 100% { transform: translateY(calc(100% + 100px)); }
+  }
+
+  .box-corners {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+
+    .corner {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: var(--stroke-sm) solid rgba(52, 191, 255, 0.6);
+      box-shadow: 0 0 6px rgba(52, 191, 255, 0.3);
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease;
+
+      &-tl {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+      }
+      &-tr {
+        top: -1px;
+        right: -1px;
+        border-left: none;
+        border-bottom: none;
+      }
+      &-bl {
+        bottom: -1px;
+        left: -1px;
+        border-right: none;
+        border-top: none;
+      }
+      &-br {
+        bottom: -1px;
+        right: -1px;
+        border-left: none;
+        border-top: none;
       }
     }
   }
