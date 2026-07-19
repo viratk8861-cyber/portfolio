@@ -21,6 +21,8 @@ const setup = ({
   contentServices,
   tlDetails,
   contentDetails,
+  tlEducation,
+  contentEducation,
   contentProgressCount,
 }: {
   about: HTMLElement;
@@ -30,6 +32,8 @@ const setup = ({
   contentServices: HTMLDivElement;
   tlDetails: gsap.core.Timeline;
   contentDetails: HTMLDivElement;
+  tlEducation: gsap.core.Timeline;
+  contentEducation: HTMLDivElement;
   contentProgressCount: HTMLDivElement;
 }) => {
   setupInAnimation(about);
@@ -42,6 +46,8 @@ const setup = ({
     contentServices,
     tlDetails,
     contentDetails,
+    tlEducation,
+    contentEducation,
     contentProgressCount,
   });
   setupOutAnimation(about);
@@ -186,16 +192,20 @@ const setupSectionsAnimation = ({
   contentServices,
   tlDetails,
   contentDetails,
+  tlEducation,
+  contentEducation,
   contentProgressCount,
 }: {
   about: HTMLElement;
   contentDescription: HTMLDivElement;
   contentServices: HTMLDivElement;
   contentDetails: HTMLDivElement;
+  contentEducation: HTMLDivElement;
   contentProgressCount: HTMLDivElement;
   tlDescription: gsap.core.Timeline;
   tlServices: gsap.core.Timeline;
   tlDetails: gsap.core.Timeline;
+  tlEducation: gsap.core.Timeline;
 }) => {
   sectionsMm = createMatchMedia((_context, { isLandscape }) => {
     const tl = gsap.timeline({
@@ -212,14 +222,13 @@ const setupSectionsAnimation = ({
     tl.to(completed, { value: true, duration: 0 }, 1);
 
     if (isLandscape) {
-      // Equal spacing between three animations: 0, 0.275, 0.55
       const DETAILS_DELAY = 0;
-      const DESCRIPTION_DELAY = 0.4;
-      const SERVICES_DELAY = 0.8;
+      const DESCRIPTION_DELAY = 0.3;
+      const SERVICES_DELAY = 0.6;
+      const EDUCATION_DELAY = 0.9;
 
       // Details animation (first, only on landscape)
       tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);
-      //tl.fromTo(contentDetails, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DETAILS_DELAY);
       tl.add(() => {
         tlDetails?.play();
       }, DETAILS_DELAY);
@@ -231,21 +240,26 @@ const setupSectionsAnimation = ({
         { opacity: 1, duration: 0.15, ease: "power1.out" },
         DESCRIPTION_DELAY,
       );
-      //tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DESCRIPTION_DELAY);
       tl.add(() => {
         tlDescription?.play();
       }, DESCRIPTION_DELAY);
 
       // Services animation
       tl.fromTo(contentServices, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SERVICES_DELAY);
-      //tl.fromTo(contentServices, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SERVICES_DELAY);
       tl.add(() => {
         tlServices?.play();
       }, SERVICES_DELAY);
+
+      // Education animation
+      tl.fromTo(contentEducation, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, EDUCATION_DELAY);
+      tl.add(() => {
+        tlEducation?.play();
+      }, EDUCATION_DELAY);
     } else {
-      // Mobile: only description and services (details hidden on portrait)
+      // Mobile: Description, Services, and Education sequentially
       const DESCRIPTION_DELAY = 0;
-      const SERVICES_DELAY = 0.6;
+      const SERVICES_DELAY = 0.5;
+      const EDUCATION_DELAY = 1.0;
 
       // Details animation disabled - BoxDetails is hidden on portrait
 
@@ -268,9 +282,21 @@ const setupSectionsAnimation = ({
         { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
         SERVICES_DELAY,
       );
+      tl.to(contentServices, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.out" }, EDUCATION_DELAY - 0.075);
       tl.add(() => {
         tlServices?.play();
       }, SERVICES_DELAY);
+
+      // Education animation
+      tl.fromTo(
+        contentEducation,
+        { opacity: 0, y: "10vh" },
+        { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
+        EDUCATION_DELAY,
+      );
+      tl.add(() => {
+        tlEducation?.play();
+      }, EDUCATION_DELAY);
 
       // ProgressCount animation - fade in on portrait, never fade out
       tl.fromTo(

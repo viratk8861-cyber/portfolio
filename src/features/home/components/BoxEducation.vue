@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { t } from "../../../i18n/utils/translate";
-import { ref, watchEffect, onBeforeUnmount } from "vue";
+import { computed, ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
+import { locale } from "../../../i18n/store";
 import AppearingText from "../../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../../utils/sizes";
 import { Vector3 } from "three";
-import PinIcon from "../../../components/icons/Pin.vue";
 import ProjectedElement from "../../../components/ProjectedElement.vue";
 
-const point = new Vector3(-0.76, 3.6, 6.75);
+const point = new Vector3(0.76, 3.9, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -22,56 +21,47 @@ watchEffect((onInvalidate) => {
   const wrapperEl = wrapperRef.value;
   if (!wrapperEl) return;
 
-  // Clean up previous matchMedia
   if (matchMedia) {
     matchMedia.revert();
     matchMedia = null;
   }
 
-  // Initialize GSAP matchMedia
   matchMedia = gsap.matchMedia();
 
   matchMedia.add(
     {
       isMobile: `(max-width: ${BREAKPOINTS.md - 1}px)`,
       isDesktop: `(min-width: ${BREAKPOINTS.md}px)`,
-      isLandscape: `(min-aspect-ratio: 1)`,
     },
     (context) => {
       const { conditions } = context;
-      const { isLandscape } = conditions as { isMobile: boolean; isDesktop: boolean; isLandscape: boolean };
+      const { isMobile } = conditions as { isMobile: boolean; isDesktop: boolean };
 
       const tl = gsap.timeline({
         paused: true,
       });
 
-      // Only animate clipPath on landscape (animations disabled on portrait)
-      if (isLandscape) {
+      if (!isMobile) {
         tl.fromTo(
           wrapperEl,
-          { clipPath: "inset(0% 0% 0% 100%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.3, ease: "none" },
+          { clipPath: "inset(0% 100% 0% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
           0,
         );
       } else {
-        // On portrait, set clipPath immediately without animation
         gsap.set(wrapperEl, { clipPath: "inset(0% 0% 0% 0%)" });
       }
 
-      // Only add timeline animations on landscape
-      if (isLandscape) {
-        for (let i = 0; i < timelines.value.length; i++) {
-          const item = timelines.value[i];
-          if (!item) continue;
-          tl.add(() => {
-            item.timeline.restart(true);
-          }, item.delay + 0.25);
-        }
+      for (let i = 0; i < timelines.value.length; i++) {
+        const item = timelines.value[i];
+        if (!item) continue;
+        tl.add(() => {
+          item.timeline.restart(true);
+        }, item.delay + 0.25);
       }
 
       emit("timeline:created", tl);
 
-      // Return cleanup function
       return () => {
         tl.kill();
       };
@@ -106,18 +96,64 @@ const handleMouseMove = (e: MouseEvent) => {
   mouseX.value = e.clientX - rect.left;
   mouseY.value = e.clientY - rect.top;
 };
+
+interface EducationItem {
+  level: string;
+  name: string;
+  address: string;
+}
+
+const EDUCATION_EN: EducationItem[] = [
+  {
+    level: "Graduation (BCA)",
+    name: "Satuababa BCA College",
+    address: "Palitana, Gujarat, India",
+  },
+  {
+    level: "12th (HSC)",
+    name: "Santramnath Vidhya Sankul",
+    address: "Kukad, Gujarat, India",
+  },
+  {
+    level: "10th (SSC)",
+    name: "Kasturba U.B. School",
+    address: "Moti Paniyali, Gujarat, India",
+  },
+];
+
+const EDUCATION_HI: EducationItem[] = [
+  {
+    level: "स्नातक (BCA)",
+    name: "सतुआबाबा BCA कॉलेज",
+    address: "पालिताना, गुजरात, भारत",
+  },
+  {
+    level: "12वीं (HSC)",
+    name: "संत्रामनाथ विद्या संकुल",
+    address: "कुकड़, गुजरात, भारत",
+  },
+  {
+    level: "10वीं (SSC)",
+    name: "कस्तूरबा U.B. स्कूल",
+    address: "मोटी पाणियाली, गुजरात, भारत",
+  },
+];
+
+const educationItems = computed(() => {
+  return locale.value === "en" ? EDUCATION_EN : EDUCATION_HI;
+});
 </script>
 
 <template>
   <ProjectedElement :point="point">
-    <div ref="wrapperRef" class="box-details">
+    <div ref="wrapperRef" class="box-education">
       <div
-        class="box-details-content"
+        class="box-education-content"
         @mousemove="handleMouseMove"
         @mouseenter="isHovered = true"
         @mouseleave="isHovered = false"
         :style="isHovered ? {
-          background: `radial-gradient(circle 100px at ${mouseX}px ${mouseY}px, rgba(52, 191, 255, 0.15) 0%, transparent 80%), linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%)`
+          background: `radial-gradient(circle 120px at ${mouseX}px ${mouseY}px, rgba(52, 191, 255, 0.15) 0%, transparent 80%), linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%)`
         } : {}"
       >
         <!-- Corner brackets -->
@@ -128,25 +164,39 @@ const handleMouseMove = (e: MouseEvent) => {
           <div class="corner corner-br"></div>
         </div>
 
-        <div class="box-details-title">
+        <div class="box-education-title">
           <AppearingText
-            text="Kar"
+            :text="locale === 'en' ? 'Education' : 'शिक्षा'"
             :steps="1"
             :duration="0.35"
             @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
           />
         </div>
-        <div class="box-details-items">
-          <div class="box-details-item">
-            <PinIcon class="box-details-icon" />
-            <AppearingText
-              v-if="t('india')"
-              class="box-details-content-copy"
-              :text="t('india')"
-              :steps="3"
-              :duration="0.35"
-              @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
-            />
+        <div class="box-education-list">
+          <div
+            class="box-education-list-item"
+            v-for="(item, index) in educationItems"
+            :key="item.level"
+          >
+            <div class="box-education-list-item-bullet"></div>
+            <div class="box-education-list-item-details">
+              <p class="box-education-list-item-level">
+                <AppearingText
+                  :text="`${item.level} | ${item.name}`"
+                  :steps="1"
+                  :duration="0.3"
+                  @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1 + index * 0.1)"
+                />
+              </p>
+              <p class="box-education-list-item-address">
+                <AppearingText
+                  :text="item.address"
+                  :steps="1"
+                  :duration="0.3"
+                  @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
+                />
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -155,23 +205,23 @@ const handleMouseMove = (e: MouseEvent) => {
 </template>
 
 <style scoped lang="scss">
-.box-details {
+.box-education {
   --line-length: min(48px, calc(var(--svw) * 5));
 
-  display: none;
+  position: absolute;
+  bottom: var(--count-height);
+  width: calc(100% - var(--space-outer) * 2);
+  left: var(--space-outer);
 
   @include mixins.landscape {
-    display: block;
-    position: absolute;
-    padding-bottom: 3px;
-    padding-right: var(--line-length);
-    width: 240px;
-    max-width: calc(var(--svw) * 30);
-    transform: translate(-100%, -50%);
-  }
-
-  @include mixins.landscape-large {
-    width: 240px;
+    width: 440px;
+    max-width: calc(var(--svw) * 36);
+    padding-left: var(--line-length);
+    position: relative;
+    left: 0;
+    bottom: 0;
+    padding-top: 3px;
+    transform: translate(0, -50%);
   }
 
   &::after,
@@ -188,7 +238,7 @@ const handleMouseMove = (e: MouseEvent) => {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 0;
+    left: 0;
     width: 11px;
     height: 11px;
     background-color: var(--color-cyan-400);
@@ -201,20 +251,20 @@ const handleMouseMove = (e: MouseEvent) => {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 0;
+    left: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--color-cyan-400), transparent);
     background-size: 200% 100%;
-    animation: laser-pulse-left 2s linear infinite;
+    animation: laser-pulse-right 2s linear infinite;
 
     @include mixins.landscape {
       width: var(--line-length);
     }
   }
 
-  @keyframes laser-pulse-left {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+  @keyframes laser-pulse-right {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 
   &-content {
@@ -225,20 +275,20 @@ const handleMouseMove = (e: MouseEvent) => {
       linear-gradient(rgba(52, 191, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(52, 191, 255, 0.03) 1px, transparent 1px);
     background-size: 12px 12px;
-    gap: var(--space-xxs);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(0, 242, 254, 0.15);
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     position: relative;
     overflow: hidden;
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(6px);
 
     &:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
       border-color: rgba(52, 191, 255, 0.8);
-      box-shadow: 0 0 25px rgba(52, 191, 255, 0.35);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
 
       .corner-tl { transform: translate(-3px, -3px); border-color: rgba(255, 255, 255, 0.9); }
       .corner-tr { transform: translate(3px, -3px); border-color: rgba(255, 255, 255, 0.9); }
@@ -259,8 +309,6 @@ const handleMouseMove = (e: MouseEvent) => {
     }
 
     @include mixins.landscape {
-      flex-direction: column;
-      justify-content: flex-start;
       padding: var(--space-xs) var(--space-sm);
     }
 
@@ -315,45 +363,98 @@ const handleMouseMove = (e: MouseEvent) => {
     }
   }
 
-  &-item {
+  &-list {
     display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    flex-direction: row;
-    white-space: nowrap;
-    height: var(--icon-size-sm);
-  }
+    flex-direction: column;
+    gap: var(--space-sm);
+    position: relative;
 
-  &-icon {
-    width: var(--icon-size-xxs);
-    transform: translateY(-1px);
-    --icon-color: var(--color-white-400);
+    &::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background-color: rgba(52, 191, 255, 0.3);
+    }
 
-    @include mixins.mq("md") {
-      width: var(--icon-size-xs);
+    &-item {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      position: relative;
+
+      &-bullet {
+        width: 9px;
+        height: 9px;
+        background-color: var(--color-cyan-400);
+        border-radius: 50%;
+        margin-top: 4px;
+        z-index: 1;
+        box-shadow: 0 0 8px var(--color-cyan-400);
+        position: relative;
+        flex-shrink: 0;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: -3px;
+          left: -3px;
+          right: -3px;
+          bottom: -3px;
+          border: 1px solid var(--color-cyan-400);
+          border-radius: 50%;
+          animation: bullet-pulse 1.8s ease-out infinite;
+          opacity: 0;
+        }
+      }
+
+      @keyframes bullet-pulse {
+        0% { transform: scale(0.6); opacity: 0; }
+        50% { opacity: 0.5; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+
+      &-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      &-level {
+        font-weight: 700;
+        color: var(--color-text-cyan-400);
+        font-size: var(--font-size-md);
+
+        @include mixins.landscape {
+          font-size: var(--font-size-sm);
+        }
+
+        @include mixins.landscape-large {
+          font-size: var(--font-size-md);
+        }
+      }
+
+      &-address {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-xs);
+        font-style: italic;
+      }
     }
   }
 
   &-title {
-    font-size: var(--font-size-title-xxs);
+    font-size: var(--font-size-title-xs);
     font-weight: 700;
+    color: var(--color-text-cyan-400);
 
-    @include mixins.mq("md") {
-      font-size: var(--font-size-title-sm);
-    }
-  }
-
-  &-items {
-    display: flex;
-    font-size: var(--font-size-sm);
-    flex-direction: column;
-
-    @include mixins.mq("md") {
-      font-size: var(--font-size-md);
+    @include mixins.landscape {
+      font-size: var(--font-size-title-xxs);
     }
 
-    &-copy {
-      flex: 0.5;
+    @include mixins.landscape-large {
+      font-size: var(--font-size-title-xs);
     }
   }
 }

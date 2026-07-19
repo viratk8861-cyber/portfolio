@@ -22,9 +22,23 @@ const updatePosition = () => {
   const isLandscape = sizes.isLandscape;
   const { point } = props;
 
+  let xOffset = 0;
+  let yOffset = 0;
+
+  if (isLandscape) {
+    // Generate organic unique float offsets based on the 3D coordinate seed
+    const seed = point.x * 5.3 + point.y * 11.7;
+    const time = Date.now() * 0.0016; // speed
+    yOffset = Math.sin(time + seed) * 5; // 5px vertical oscillation
+    xOffset = Math.cos(time * 0.7 + seed) * 2.5; // 2.5px horizontal oscillation
+  }
+
   const screenPos = isLandscape ? camera.project(point) : { x: 0, y: 0 };
 
-  const transform = isLandscape ? `translate(${screenPos.x}px, ${screenPos.y}px)` : `translate(0px, 0px)`;
+  const finalX = isLandscape ? screenPos.x + xOffset : 0;
+  const finalY = isLandscape ? screenPos.y + yOffset : 0;
+
+  const transform = `translate(${finalX}px, ${finalY}px)`;
 
   if (transform !== lastTransform) {
     wrapperRef.value.style.transform = transform;
